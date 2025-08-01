@@ -1,0 +1,46 @@
+<main class="p-4 max-w-xl mx-auto">
+  <h1 class="text-2xl mb-4">Appointments</h1>
+
+  <form (ngSubmit)="add()" class="mb-6 space-y-2">
+    <input [(ngModel)]="newClientName" name="client" placeholder="Client Name" required class="border p-2 w-full"/>
+    <input [(ngModel)]="newStartTime"  name="start"  type="datetime-local" required class="border p-2 w-full"/>
+    <input [(ngModel)]="newEndTime"    name="end"    type="datetime-local" required class="border p-2 w-full"/>
+    <textarea [(ngModel)]="newNotes"   name="notes"  placeholder="Notes (optional)" class="border p-2 w-full"></textarea>
+    <button type="submit" [disabled]="loading" class="bg-blue-600 text-white px-4 py-2 rounded">
+      {{ loading ? 'Saving…' : 'Add Appointment' }}
+    </button>
+  </form>
+
+  <p *ngIf="loading" class="text-gray-500">Loading…</p>
+  <p *ngIf="error" class="text-red-600">Error: {{ error }}</p>
+
+  <ul *ngIf="!loading && !error" class="space-y-4">
+    <li *ngFor="let a of appointments" class="border p-4 rounded shadow-sm">
+      <div class="flex justify-between items-baseline">
+        <strong class="text-lg">{{ a.clientName }}</strong>
+        <small class="text-gray-600">
+          {{ a.startTime | date:'short' }} – {{ a.endTime | date:'short' }}
+        </small>
+      </div>
+      <p *ngIf="a.notes" class="mt-2">{{ a.notes }}</p>
+      <div class="mt-3 flex gap-2">
+        <button 
+          *ngIf="!a.confirmed"
+          (click)="confirm(a)"
+          class="bg-green-500 text-white px-2 py-1 rounded">
+          ✔ Confirm
+        </button>
+        <span 
+          [class.text-green-700]="a.confirmed"
+          [class.text-yellow-700]="!a.confirmed">
+          {{ a.confirmed ? 'Confirmed' : 'Pending' }}
+        </span>
+        <button 
+          (click)="delete(a.id)"
+          class="ml-auto text-red-600 hover:underline">
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+</main>
