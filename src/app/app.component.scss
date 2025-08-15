@@ -1,38 +1,133 @@
-:host {
-  display: block;
-  background: #f5f5f5;
-  min-height: 100vh;
+// Custom animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.container {
-  max-width: 800px;
-  margin: 24px auto;
-  padding: 0 16px;
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.form-card {
-  margin-bottom: 24px;
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.appointment-card {
-  margin-bottom: 16px;
+.fadeIn {
+  animation: fadeIn 0.5s ease-out;
 }
 
-.loading, .error {
-  text-align: center;
-  margin: 16px 0;
+.fadeInLeft {
+  animation: fadeInLeft 0.5s ease-out;
 }
 
-.error {
-  color: #f44336;
+.fadeInRight {
+  animation: fadeInRight 0.5s ease-out;
 }
 
-mat-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+// Custom hover effects for cards
+:host ::ng-deep {
+  .p-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  // Make datepicker dropdowns more prominent
+  .p-datepicker .p-inputtext {
+    border-radius: 8px;
+  }
+
+  // Enhance button animations
+  .p-button {
+    transition: all 0.2s;
+    
+    &:not(:disabled):hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // Better spacing for form fields
+  .field {
+    margin-bottom: 1.25rem;
+  }
+
+  // Enhance DataView items
+  .p-dataview-content {
+    .surface-card {
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: var(--primary-color);
+        transform: scaleY(0);
+        transition: transform 0.3s;
+      }
+      
+      &:hover::before {
+        transform: scaleY(1);
+      }
+    }
+  }
+
+  // Enhance tags
+  .p-tag {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  // Loading spinner container
+  .p-progress-spinner {
+    margin: 0 auto;
+  }
+
+  // Toast positioning
+  .p-toast {
+    z-index: 9999;
+  }
 }
 
-mat-chip-list {
-  margin-left: auto;
+// Responsive adjustments
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  :host ::ng-deep {
+    .p-card .p-card-body {
+      padding: 1rem;
+    }
+  }
 }

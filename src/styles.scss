@@ -1,33 +1,65 @@
+/* Import PrimeNG Theme from CDN */
+@import url('https://unpkg.com/primeng@latest/resources/themes/lara-light-blue/theme.css');
+@import url('https://unpkg.com/primeng@latest/resources/primeng.min.css');
 
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
-@use '@angular/material' as mat;
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$magenta-palette,
-      tertiary: mat.$violet-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  font-size: 14px;
+}
 
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--surface-ground);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-}/* You can add global styles to this file, and also import other style files */
+// Utility classes for better spacing
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// Better scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-400);
+  border-radius: 4px;
+  
+  &:hover {
+    background: var(--surface-500);
+  }
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Focus styles
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.2);
+}
+
+// Selection color
+::selection {
+  background-color: var(--primary-color);
+  color: white;
+}
